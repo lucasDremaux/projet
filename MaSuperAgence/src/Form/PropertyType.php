@@ -55,13 +55,5 @@ class PropertyType extends AbstractType
         }
         return $output;
     }
-}
-
-
-/* 
-'attr' => [
-'class'=> 'select-tags'
-]
-*/
-                
+}                
 ?>
