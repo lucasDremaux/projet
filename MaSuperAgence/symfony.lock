@@ -109,6 +109,9 @@
     "fzaninotto/faker": {
         "version": "v1.5.0"
     },
+    "imagine/imagine": {
+        "version": "1.2.4"
+    },
     "jms/metadata": {
         "version": "2.5.1"
     },
@@ -126,6 +129,19 @@
     },
     "laminas/laminas-zendframework-bridge": {
         "version": "1.4.0"
+    },
+    "liip/imagine-bundle": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.8",
+            "ref": "d1227d002b70d1a1f941d91845fcd7ac7fbfc929"
+        },
+        "files": [
+            "./config/packages/liip_imagine.yaml",
+            "./config/routes/liip_imagine.yaml"
+        ]
     },
     "monolog/monolog": {
         "version": "2.3.4"

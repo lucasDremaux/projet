@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\ORM\QueryBuilder as ORMQueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PropertyType extends AbstractType
 {
@@ -33,6 +34,11 @@ class PropertyType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
             ])
+
+            ->add('imageFile', FileType::class, [
+                'required' => false,
+            ])
+
             ->add('city', null, ['label' => 'Ville'])
             ->add('address', null, ['label' => 'Adresse'])
             ->add('postal_code', null, ['label' => 'Code Postal'])

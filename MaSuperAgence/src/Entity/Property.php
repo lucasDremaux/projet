@@ -7,10 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Cocur\Slugify\Slugify;
+use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-//use Symfony\Component\HttpFoundation\File;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -20,7 +21,6 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class Property
 {
-
     const HEAT = [
         0 => 'Electrique',
         1 => 'Gaz'
@@ -108,11 +108,6 @@ class Property
     private $sold = false;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
-     */
-    private $created_at;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $saphir;
@@ -132,9 +127,14 @@ class Property
      */
     private $options;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updated_at;
+
     public function __construct()
     {
-        $this->created_at = new \DateTimeImmutable();
+        $this->created_at = new \DateTime();
         $this->options = new ArrayCollection();
     }
 
@@ -292,14 +292,15 @@ class Property
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?\DateTime
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setCreatedAt(\DateTime $created_at): self
     {
-        $this->created_at = $created_at;
+        $this->created_at = new \DateTime();
+        //$this->created_at = $created_at;
         return $this;
     }
 
@@ -394,7 +395,20 @@ class Property
     public function setImageFile(?File $imageFile): Property
     {
         $this->imageFile = $imageFile;
+        if (null !== $imageFile) {
+            $this->updated_at = new \DateTime();
+        }
         return $this;
     }
 
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+        return $this;
+    }
 }
