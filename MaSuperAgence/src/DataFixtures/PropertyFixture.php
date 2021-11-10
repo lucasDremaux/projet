@@ -28,9 +28,6 @@ class PropertyFixture extends Fixture
                 ->setAddress($faker->address)
                 ->setPostalCode($faker->postcode)
                 ->setSold(false)
-                ->setSaphir(0, 1)
-                ->setSuperAgence3(0, 1)
-                ->setLaForet(0, 1)
                 ;
             $manager->persist($property);
         }

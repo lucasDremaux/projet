@@ -7,7 +7,7 @@ class Contact
 {
 
     /**
-     * @var string|null
+     * @var string
      * @Assert\NotBlank()
      * @Assert\Lenght(min=2, max=100)
      */
@@ -21,7 +21,7 @@ class Contact
     private $lastname;
 
     /**
-     * @var string|null
+     * @var string
      * @Assert\NotBlank()
      * @Assert\Regex(pattern="/[0-9]{10}/")
      */

@@ -110,21 +110,6 @@ class Property
     private $sold = false;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $saphir;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $laForet;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $superAgence3;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Option::class, inversedBy="properties")
      */
     private $options;
@@ -303,39 +288,6 @@ class Property
     {
         $this->created_at = new \DateTime();
         //$this->created_at = $created_at;
-        return $this;
-    }
-
-    public function getSaphir(): ?bool
-    {
-        return $this->saphir;
-    }
-
-    public function setSaphir(bool $saphir): self
-    {
-        $this->saphir = $saphir;
-        return $this;
-    }
-
-    public function getLaForet(): ?bool
-    {
-        return $this->laForet;
-    }
-
-    public function setLaForet(bool $laForet): self
-    {
-        $this->laForet = $laForet;
-        return $this;
-    }
-
-    public function getSuperAgence3(): ?bool
-    {
-        return $this->superAgence3;
-    }
-
-    public function setSuperAgence3(bool $superAgence3): self
-    {
-        $this->superAgence3 = $superAgence3;
         return $this;
     }
 
