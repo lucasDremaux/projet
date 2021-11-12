@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Agence;
 use App\Entity\Option;
 use App\Entity\Property;
 use Symfony\Component\Form\AbstractType;
@@ -32,6 +33,12 @@ class PropertyType extends AbstractType
             ])
             ->add('options', EntityType::class, [
                 'class' => Option::class,
+                'choice_label' => 'name',
+                'multiple' => 'multiple',
+                'required' => false,
+            ])
+            ->add('agences', EntityType::class, [
+                'class' => Agence::class,
                 'choice_label' => 'name',
                 'multiple' => 'multiple',
                 'required' => false,

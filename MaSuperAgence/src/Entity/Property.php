@@ -119,10 +119,16 @@ class Property
      */
     private $updated_at;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Agence::class, inversedBy="properties")
+     */
+    private $agences;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
         $this->options = new ArrayCollection();
+        $this->agences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -363,6 +369,33 @@ class Property
     public function setUpdatedAt(?\DateTimeInterface $updated_at): self
     {
         $this->updated_at = $updated_at;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Agence[]
+     */
+    public function getAgences(): Collection
+    {
+        return $this->agences;
+    }
+
+    public function addAgence(Agence $agence): self
+    {
+        if (!$this->agences->contains($agence)) {
+            $this->agences[] = $agence;
+            $agence->addProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAgence(Agence $agence): self
+    {
+        if ($this->agences->removeElement($agence)) {
+            $agence->removeProperty($this);
+        }
+
         return $this;
     }
 }

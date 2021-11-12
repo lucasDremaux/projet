@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title 'Gérer les options' %}
+{% block title 'Gérer les biens' %}
 
 {% block body %}
     <div class="container mt-4">
 
-        <h1>Gérer les options</h1>
+        <h1>Gestion des agences</h1>
 
         {% for message in app.flashes('success') %}
         <div class="alert alert-success">
@@ -21,15 +21,15 @@
             </tr>
             </thead>
             <tbody>
-            {% for option in options %}
+            {% for agence in agences %}
             <tr>
-                <td>{{ option.name }}</td>
+                <td>{{ agence.name }}</td>
 
-                <td><a href="{{ path('admin.option.edit', {id: option.id}) }}" class="btn btn-secondary">Editer</a>
+                <td><a href="{{ path('admin.agence.edit', {id: agence.id}) }}" class="btn btn-secondary">Editer</a>
 
-                    <form methode="post" action="{{ path('admin.option.delete', {id: option.id}) }}" style="display: inline-block" onsubmit="return confirm('êtes vous vraiment sûr ?')">
+                    <form methode="post" action="{{ path('admin.agence.delete', {id: agence.id}) }}" style="display: inline-block" onsubmit="return confirm('êtes vous vraiment sûr ?')">
                         <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ option.id) }}">
+                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ agence.id) }}">
                         <button class="btn btn-danger">Supprimer</button>
                     </form>
                     
@@ -41,8 +41,8 @@
 
         <div class="text-center">
             <a href="{{ path('admin.property.new') }}" class="btn btn-primary">Créer un nouveau biens</a>
-            <a href="{{ path('admin.option.new') }}" class="btn btn-primary">Ajouter une nouvelle options</a>
-            <a href="{{ path('admin.agence.new') }}" class="btn btn-primary">Ajouter une nouvelle agence</a>
+            <a href="{{ path('admin.option.index') }}" class="btn btn-primary">Ajouter une nouvelle options</a>
+            <a href="{{ path('admin.agence.index') }}" class="btn btn-primary">Ajouter une nouvelle agence</a>
         </div>
 
     </div>     
