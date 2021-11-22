@@ -5,45 +5,76 @@
 {% block body %}
     <div class="container mt-4">
         <div class="jumbotron"> 
-            <div clas="container">
-                {{ form_start(form) }}
-                <div class="form_row">
-                    <div class="col">
-                        {{ form_row(form.minSurface) }}
-                    <div>
-                    <div classe="col">
-                        {{ form_row(form.maxPrice) }}
+            <div class="container">
+                <div id="d1">
+                    {{ form_start(form) }}
+                    <div class="form_row">
+                        <div id="d2">    
+                        <div class="row">
+                            <div class="col-md-5">{{ form_row(form.minSurface) }}</div>
+                            <div class="col-md-5">{{ form_row(form.maxPrice) }}</div>
+                        </div>
+                        <div class="row">
+                            <p>Options :</p>
+                            <div class="col-md-7">{{ form_row(form.options)}}</div>
+                            <p>Agences :</p>
+                            <div class="col-md-7">{{ form_row(form.agences)}}</div>
+                        </div>
+                        
+                        <div class="col">
+                            <button class="btn btn-primary">Rechercher</button>
+                        </div>
+                        </div>
                     </div>
-                    <div classe="col">
-                        {{ form_row(form.options)}}
-                    <div>
-                    <div classe="col">
-                        {{ form_row(form.agences)}}
-                    <div>
-                    
-                    <div class="col">
-                        <button class="btn btn-primary">Rechercher</button>
-                    </div>
+                    {{ form_end(form) }}
                 </div>
-                {{ form_end(form) }}
-            <div>
-        <div>
-    </div>
-    <br>
-<div class="container mt-4">
-    <h1>Voir tous les biens</h1>
-
-    <div class="row">
-        {% for property in properties %}
-            <div class="col-md-4">
-                {% include 'property/_property.html.twig' %}
+                <br>
+                <button id="togg2" class="btn btn-primary">Afficher / Cacher les options</button>
             </div>
-        {% endfor %}
+        </div>
     </div>
-    
+
+
+
+
+    <br>
+    <div class="container mt-4">
+        <h1>Voir tous les biens</h1>
+
+        <div class="row">
+            {% for property in properties %}
+                <div class="col-md-4">
+                    {% include 'property/_property.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
         <div class="pagination">
             {{ knp_pagination_render(properties) }}
         </div>
+    </div>
 
-</div>
+
+
+
+
+
+    <html lang="fr">
+    <script type="text/javascript"></script>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    </head>
+
+    <script type="text/javascript">
+        function togg(){
+            if(getComputedStyle(d2).display != "none"){
+                d2.style.display = "none";
+            } else {
+                d2.style.display = "block";
+            }
+        };
+        togg2.onclick = togg;
+    </script>
+  
 {% endblock %}
