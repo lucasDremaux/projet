@@ -9,10 +9,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
 #[Route('/admin/agence')]
 class AdminAgenceController extends AbstractController
 {
+
+    public function __construct(AgenceRepository $repository, EntityManagerInterface $em)
+    {
+        $this->repository = $repository;
+        $this->em = $em;
+    }
+
     #[Route('/', name: 'admin.agence.index', methods: ['GET'])]
     public function index(AgenceRepository $agenceRepository): Response
     {
@@ -60,15 +68,20 @@ class AdminAgenceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'admin.agence.delete', methods: ['POST'])]
-    public function delete(Request $request, Agence $agence): Response
-    {
-        if ($this->isCsrfTokenValid('admin/delete'.$agence->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($agence);
-            $entityManager->flush();
-        }
+    /**
+     * @Route("admin/agence/delete/{id}", name="admin.agence.delete")
+     * @param Agence $agence
+     * @return \Symfony\Component\HttpFoudattion\RedirectResponse
+     */
 
-        return $this->redirectToRoute('admin.agence.index', [], Response::HTTP_SEE_OTHER);
+    public function delete(Agence $agence, Request $request)
+    {    
+        if ($this->isCsrfTokenValid('delete' . $agence->getId(), $request->get('_token')))
+        {
+            $this->em->remove($agence);
+            $this->em->flush();
+            $this->addFlash('success', 'suppression de votre bien');
+        }
+        return $this->redirectToRoute('admin.agence.index');
     }
 }

@@ -9,10 +9,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
+/**
+* @var OptionRepository
+*/
 #[Route('/admin/option')]
 class AdminOptionController extends AbstractController
 {
+
+    public function __construct(OptionRepository $repository, EntityManagerInterface $em)
+    {
+        $this->repository = $repository;
+        $this->em = $em;
+    }
+
     #[Route('/', name: 'admin.option.index', methods: ['GET'])]
     public function index(OptionRepository $optionRepository): Response
     {
@@ -60,15 +71,22 @@ class AdminOptionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'admin.option.delete', methods: ['POST'])]
-    public function delete(Request $request, Option $option): Response
-    {
-        if ($this->isCsrfTokenValid('admin/delete'.$option->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($option);
-            $entityManager->flush();
-        }
+    /**
+     * @Route("admin/option/delete/{id}", name="admin.option.delete")
+     * @param Option $option
+     * @return \Symfony\Component\HttpFoudattion\RedirectResponse
+     */
 
-        return $this->redirectToRoute('admin.option.index', [], Response::HTTP_SEE_OTHER);
+    public function delete(Option $option, Request $request)
+    {    
+        if ($this->isCsrfTokenValid('delete' . $option->getId(), $request->get('_token')))
+        {
+            $this->em->remove($option);
+            $this->em->flush();
+            $this->addFlash('success', 'suppression de votre bien');
+        }
+        return $this->redirectToRoute('admin.option.index');
     }
+
+
 }
