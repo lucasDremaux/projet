@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 use App\Repository\CAgenceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,45 +14,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CAgence
 {
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\Lenght(min=2, max=100)
-     */
-    private $firstname;
-
-    /**
-     * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Lenght(min=2, max=100)
-     */
-    private $lastname;
-
-    /**
-     * @var string
-     * @Assert\NotBlank()
-     * @Assert\Regex(pattern="/[0-9]{10}/")
-     */
-    private $phone;
-
-    /**
-     * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     */
-    private $email;
-
-    /**
-     * @var string|null
-     * @Assert\NotBlank()
-     * @Assert\Lenght(min=10)
-     */
-    private $message;
-
-    /**
-     * @var Property|null
-     */
-    private $property;
 
     /**
      * @ORM\Id
@@ -69,9 +32,49 @@ class CAgence
      */
     private $properties;
 
+    /***** cantact.php *****/
+
+    /**
+     * @var string
+     */
+    private $firstname;
+
+    /**
+     * @var string|null
+     */
+    private $lastname;
+
+    /**
+     * @var string
+     */
+    private $phone;
+
+    /**
+     * @var string|null
+     */
+    private $email;
+
+    /**
+     * @var string|null
+     */
+    private $message;
+
+    /**
+     * @var Property|null
+     */
+    private $property;
+
+    /**
+     * @var ArrayCollection
+     */
+    private $agences;
+
+    /****** methodes ******/
+    
     public function __construct()
     {
         $this->properties = new ArrayCollection();
+        $this->agences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -116,15 +119,7 @@ class CAgence
     }
 
 
-
-
-
-
-
-
-
-
-
+    /******************* formulaire contact.php ************************/
 
     /**
      * @return null|string
@@ -147,7 +142,6 @@ class CAgence
     /**
      * @return null|string
      */
-
     public function getLastname(): string
     {
         return $this->lastname;
@@ -223,7 +217,7 @@ class CAgence
     /**
      * @return Property|null
      */
-    public function getProperty(Property $property)
+    public function getProperty(Property $property): CAgence
     {
         $this->property = $property;
         return $this;
@@ -233,9 +227,26 @@ class CAgence
      * @param Property|null $property
      * @return Contact
      */
-    public function setProperty(Property $property)
+    public function setProperty(Property $property): CAgence
     {
         $this->property = $property;
         return $this;
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAgences(): ArrayCollection
+    {
+        return $this->agences;
+    }
+
+    /**
+     * @param ArrayCollection $agences
+     */
+    public function setAgences(ArrayCollection $agences): void
+    {
+        $this->agences = $agences;       
+    }
+
 }

@@ -102,6 +102,5 @@ class PropertySearch
     {
         $this->agences = $agences;       
     }
-
 }
 ?>

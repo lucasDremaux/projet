@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 use App\Controller\Contact;
+use App\Controller\CAgence;
 use App\Entity\Contact as EntityContact;
+use App\Entity\CAgence as EntityCAgance;
 use App\Entity\Property;
 use App\Entity\PropertySearch;
 use App\Form\ContactType;
+use App\Form\CAgenceType;
 use App\Form\PropertySearchType;
 use App\Repository\PropertyRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -70,10 +73,15 @@ class PropertyController extends AbstractController
                 'slug' => $property->getSlug()
             ], 301); 
         }
-
+        /*
         $contact = new EntityContact();
         $contact->setProperty($property);
         $form = $this->createForm(ContactType::class, $contact);
+        */
+        $cagence = new EntityCAgance();
+        $cagence->setProperty($property);
+        $form = $this->createForm(CAgenceType::class, $cagence);
+        
 
         if ($form->isSubmitted() && $form->isValid())
         {

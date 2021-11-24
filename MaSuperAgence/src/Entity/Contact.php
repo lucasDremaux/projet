@@ -46,7 +46,10 @@ class Contact
      */
     private $property;
 
-
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $nameAgence;
 
 
 
@@ -162,6 +165,25 @@ class Contact
     {
         $this->property = $property;
         return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+
+    public function getNameAgence(): string
+    {
+        return $this->nameAgence;
+    }
+
+    /**
+     * @param null|string $nameAgence
+     * @return Contact
+     */
+    public function setNameAgence(string $nameAgence)
+    {
+    $this->nameAgence = $nameAgence;
+    return $this;
     }
 }
 

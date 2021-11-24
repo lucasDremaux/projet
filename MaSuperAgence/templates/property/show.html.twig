@@ -54,7 +54,7 @@
                 </table>
             </div>
             <div class="col-md-4">
-                <h2>Spécificités</h2>
+                <h2>Spécificité(s)</h2>
                 <ul class="list-group">
                     {% for option in property.options %}
                     <li class="list-group-item">{{ option.name }}</li>
@@ -63,11 +63,11 @@
         </div>
 
         <div id="contactForm" class="mt-4">
-            <h3>Contacter une Agences</h3>
+            <h3>Contacter une Agence</h3>
                 {{form_start(form)}}
                 <div class="row">
-                    <p>Agences :</p>
-                    <div class="col">{{ form_row(form.nameAgence) }}</div>
+                    <p>Selectionné une ou plusieurs agences :</p>
+                    <div class="col">{{ form_row(form.agences) }}</div>
                 </div>
                 <div class="row">
                     <div class="col">{{ form_row(form.firstname) }}</div>
