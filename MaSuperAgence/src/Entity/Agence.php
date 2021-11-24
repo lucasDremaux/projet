@@ -29,9 +29,15 @@ class Agence
      */
     private $properties;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=CAgence::class, mappedBy="properties")
+     */
+    private $cAgences;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
+        $this->cAgences = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,6 +77,33 @@ class Agence
     public function removeProperty(Property $property): self
     {
         $this->properties->removeElement($property);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CAgence[]
+     */
+    public function getCAgences(): Collection
+    {
+        return $this->cAgences;
+    }
+
+    public function addCAgence(CAgence $cAgence): self
+    {
+        if (!$this->cAgences->contains($cAgence)) {
+            $this->cAgences[] = $cAgence;
+            $cAgence->addProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCAgence(CAgence $cAgence): self
+    {
+        if ($this->cAgences->removeElement($cAgence)) {
+            $cAgence->removeProperty($this);
+        }
 
         return $this;
     }

@@ -21,9 +21,10 @@ class ContactType extends AbstractType
             ->add('lastname', TextType::class, ['label' => 'Nom'])
             ->add('phone', TextType::class, ['label' => 'Tel'])
             ->add('email', EmailType::class)
-            ->add('message', TextareaType::class);
+            ->add('message', TextareaType::class)
             
-    }
+            ;
+    }   
 
     public function configureOptions(OptionsResolver $resolver)
     {

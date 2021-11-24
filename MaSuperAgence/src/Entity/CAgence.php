@@ -1,11 +1,17 @@
 <?php
+
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
+use App\Repository\CAgenceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
-class Contact
+/**
+ * @ORM\Entity(repositoryClass=CAgenceRepository::class)
+ */
+class CAgence
 {
-
     /**
      * @var string
      * @Assert\NotBlank()
@@ -45,6 +51,75 @@ class Contact
      * @var Property|null
      */
     private $property;
+
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Agence::class, inversedBy="cAgences")
+     */
+    private $properties;
+
+    public function __construct()
+    {
+        $this->properties = new ArrayCollection();
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Agence[]
+     */
+    public function getProperties(): Collection
+    {
+        return $this->properties;
+    }
+
+    public function addProperty(Agence $property): self
+    {
+        if (!$this->properties->contains($property)) {
+            $this->properties[] = $property;
+        }
+
+        return $this;
+    }
+
+    public function removeProperty(Agence $property): self
+    {
+        $this->properties->removeElement($property);
+
+        return $this;
+    }
+
+
+
+
+
+
 
 
 
@@ -148,7 +223,7 @@ class Contact
     /**
      * @return Property|null
      */
-    public function getProperty(Property $property): Contact
+    public function getProperty(Property $property)
     {
         $this->property = $property;
         return $this;
@@ -158,11 +233,9 @@ class Contact
      * @param Property|null $property
      * @return Contact
      */
-    public function setProperty(Property $property): Contact
+    public function setProperty(Property $property)
     {
         $this->property = $property;
         return $this;
     }
 }
-
-?>

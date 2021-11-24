@@ -46,13 +46,17 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="text-xs-center">
-            <div class="pagination">
-                {{ knp_pagination_render(properties) }}
-            </div>
-        </div>
-        
+        <div class="pagination">
+            {{ knp_pagination_render(properties) }} 
+        </div> 
     </div>
+
+    <style type="pagination">
+        .pagination 
+        {
+            float: center;
+        }
+    </style>
 
 
     <script>
