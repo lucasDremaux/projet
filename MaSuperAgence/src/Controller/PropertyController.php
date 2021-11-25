@@ -75,7 +75,6 @@ class PropertyController extends AbstractController
         $cagence->setProperty($property);
         $form = $this->createForm(CAgenceType::class, $cagence);
         
-
         if ($form->isSubmitted() && $form->isValid())
         {
             $this->addFlash('success', 'Votre mail à bien été envoyé');
