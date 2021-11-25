@@ -1,12 +1,12 @@
 <?php
-namespace App\Entity\Contact;
+namespace App\Entity\CAgence;
 
-use App\Entity\Contact;
+use App\Entity\CAgence;
 
 class ContactNotification
 {
 
-    public function notify(Contact $contact)
+    public function notify(CAgence $cAgence)
     {
 
     }

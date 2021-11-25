@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Contact;
+
 use App\Entity\Agence;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Component\Form\AbstractType;
