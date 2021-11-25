@@ -6,6 +6,8 @@
     <div class="container mt-4">
         <div class="jumbotron"> 
             <div class="container">
+                <button id="togg2" class="btn btn-primary">Afficher / Cacher les options de recherche</button>
+                <br><br>
                 {{ form_start(form) }}
                     <div class="form_row">
                         <div id="d2">    
@@ -15,9 +17,9 @@
                             </div>
                             <div class="row">
                                 <p>Options :</p>
-                                <div class="col-md-7">{{ form_row(form.options)}}</div>
+                                <div>{{ form_row(form.options)}}</div>
                                 <p>Agences :</p>
-                                <div class="col-md-7">{{ form_row(form.agences)}}</div>
+                                <div>{{ form_row(form.agences)}}</div>
                             </div>
                             
                             <div class="col">
@@ -26,14 +28,9 @@
                         </div>
                     </div>
                 {{ form_end(form) }}
-                <br>
-                <button id="togg2" class="btn btn-primary">Afficher / Cacher les options de recherche</button>
             </div>
         </div>
     </div>
-
-
-
 
     <br>
     <div class="container mt-4">
@@ -51,16 +48,15 @@
         </div> 
     </div>
 
-    <style type="pagination">
-        .pagination 
-        {
-            float: center;
-        }
+    <style>
+    .pagination {
+        justify-content: center;
+    }
+
     </style>
 
-
     <script>
-        //d2.style.display = "none";
+        d2.style.display = "none";
         function togg(){
             if(getComputedStyle(d2).display != "none"){
                 d2.style.display = "none";

@@ -36,12 +36,14 @@ class PropertyType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => 'multiple',
                 'required' => false,
+                'label' => false,
             ])
             ->add('agences', EntityType::class, [
+                'required' => false,
+                'label' => false,
                 'class' => Agence::class,
                 'choice_label' => 'name',
-                'multiple' => 'multiple',
-                'required' => false,
+                'multiple' => 'multiple', 
             ])
 
             ->add('imageFile', FileType::class, [
@@ -61,6 +63,7 @@ class PropertyType extends AbstractType
         ]);
     }
 
+    /**********  pris sur internet  ************/
     private function getChoices()
     {
         $choices = Property::HEAT;
